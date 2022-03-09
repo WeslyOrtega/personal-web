@@ -1,0 +1,10 @@
+.about-container {
+    display: flex;
+    justify-content: center;
+
+    .hello-msg {
+        font-family: 'Inconsolata', monospace;
+        font-size: 60px;
+        padding: 30px 0px;
+    }
+}
