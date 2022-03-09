@@ -3,6 +3,7 @@ import "./App.css";
 import Navbar from "./Components/Navbar/Navbar";
 import HelloMsg from "./Components/HelloMsg/HelloMsg";
 import About from "./Components/About/About";
+import Projects from "./Components/Projects/Projects";
 
 import logo from "./logo.svg";
 
@@ -12,6 +13,7 @@ function App() {
             <Navbar />
             <HelloMsg />
             <About />
+            <Projects />
             <header className="App-header">
                 <img src={logo} className="App-logo" alt="logo" />
                 <p>
