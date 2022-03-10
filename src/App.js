@@ -6,6 +6,7 @@ import About from "./Components/About/About";
 import Projects from "./Components/Projects/Projects";
 
 import logo from "./logo.svg";
+import Contact from "./Components/Contact/Contact";
 
 function App() {
     return (
@@ -14,6 +15,7 @@ function App() {
             <HelloMsg />
             <About />
             <Projects />
+            <Contact />
             <header className="App-header">
                 <img src={logo} className="App-logo" alt="logo" />
                 <p>
