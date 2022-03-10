@@ -10,7 +10,7 @@ function HelloMsg() {
 
     useEffect(() => {
         const options = {
-            strings: ["> Hello!", "> My name is Wesly Ortega"],
+            strings: ["Hello!", "My name is Wesly Ortega"],
             typeSpeed: 100,
             backSpeed: 70,
         };
@@ -24,7 +24,7 @@ function HelloMsg() {
 
     return (
         <div className='hello-msg'>
-            <span ref={element}></span>    
+            <span ref={element}/>   
         </div>
     );
 }
