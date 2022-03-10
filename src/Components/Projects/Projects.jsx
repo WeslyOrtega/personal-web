@@ -3,7 +3,7 @@ import './Projects.scss'
 function Projects() {
     return (
         <div className='projects-cotainer'>
-            <div className='section-title'>Projects</div>
+            <h1>Projects</h1>
             <div className='project'>
                 <div className='title'>Enim nostrud elit et cillum excepteur.</div>
                 <div className='divider'></div>

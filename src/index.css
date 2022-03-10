@@ -1,11 +1,26 @@
+:root {
+    /* Colors */
+    --primary-color: #ffffff;
+    --secondary-color: #000000;
+}
+
 body {
-  margin: 0;
-  font-family: 'Fredoka', sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+    margin: 0;
+    font-family: "Fredoka", sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    font-size: 16pt;
+    color: var(--primary-color);
+    background-color: #222733;
+}
+
+h1 {
+    font-size: 30pt;
+    font-weight: 400;
+    color: var(--primary-color);
 }
 
 code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
+    font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
+        monospace;
 }

@@ -6,7 +6,7 @@ import briefcase from '../../Assets/Icons/briefcase.svg'
 function About() {
     return (
         <div className='about-container'>
-            <div className='header'>About</div>
+            <h1>About</h1>
             <div className='about-item section'>
                 <div className='section-header'>
                     <div className='section-header-text'>Education</div>
