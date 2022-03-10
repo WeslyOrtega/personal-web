@@ -10,8 +10,9 @@ function HelloMsg() {
 
     useEffect(() => {
         const options = {
-            strings: ["Hello! My name is Wesly Ortega"],
-            typeSpeed: 50,
+            strings: ["Hello!", "My name is Wesly Ortega"],
+            typeSpeed: 100,
+            backSpeed: 50,
         };
 
         typed.current = new Typed(element.current, options);
