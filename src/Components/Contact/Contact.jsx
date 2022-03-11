@@ -5,7 +5,7 @@ import linkedin from '../../Assets/Icons/linkedin.svg'
 
 function Contact() {
     return (
-        <div className='container'>
+        <div className='contact-container'>
             <div className='email'>weslyortega@gmail.com</div>
             <a href='https://github.com/WeslyOrtega' target="_blank" rel='noreferrer'>
                 <img className='icon' src={github} alt="GitHub Icon" />
