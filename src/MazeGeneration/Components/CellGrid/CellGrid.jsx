@@ -8,8 +8,8 @@ class CellGrid extends Component {
 
     constructor(props) {
         super(props);
+        this.grid = [];
         this.state = {
-            grid: [],
             rows: 21,
             cols: 51,
             startRow: 10,
@@ -20,9 +20,12 @@ class CellGrid extends Component {
         this.setFuncs = this.setFuncs.bind(this);
         this.getCellNeighbors = this.getCellNeighbors.bind(this);
         this.click = this.click.bind(this);
+        this.setGrid = this.setGrid.bind(this);
+
+        this.setGrid();
     };
 
-    componentDidMount() {
+    setGrid() {
         const grid = []
         for (let i = 0; i < this.state.rows; i++) {
             const currRow = [];
@@ -33,20 +36,20 @@ class CellGrid extends Component {
                         isFinish: i === this.state.finishRow && j === this.state.finishCol,
                         isVisited: false,
                         isWall: false,
-                        setVisited: () => this.state.grid[i][j].isVisited = true,
+                        setVisited: () => this.grid[i][j].isVisited = true,
                         getNeighbors: () => this.getCellNeighbors(i, j),
                     }
                 );
             }
             grid.push(currRow);
         }
-        this.setState({ grid });
+        this.grid = grid;
     }
 
     setFuncs(row, col, funcs) {
-        let cell = this.state.grid[row][col];
+        let cell = this.grid[row][col];
         const { setVisited } = funcs;
-        this.state.grid[row][col] = {
+        this.grid[row][col] = {
             ...cell,
             animateVisited: setVisited,
         };
@@ -55,42 +58,40 @@ class CellGrid extends Component {
     getCellNeighbors(i, j) {
         let neighbors = [];
         if (i > 0) {
-            neighbors.push(this.state.grid[i - 1][j]);
+            neighbors.push(this.grid[i - 1][j]);
         }
         if (i < this.state.rows - 1) {
-            neighbors.push(this.state.grid[i + 1][j]);
+            neighbors.push(this.grid[i + 1][j]);
         }
         if (j > 0) {
-            neighbors.push(this.state.grid[i][j - 1]);
+            neighbors.push(this.grid[i][j - 1]);
         }
         if (j < this.state.cols - 1) {
-            neighbors.push(this.state.grid[i][j + 1]);
+            neighbors.push(this.grid[i][j + 1]);
         }
         return neighbors;
     }
 
     click() {
         DepthFirstSearch(
-            this.state.grid[this.state.startRow][this.state.startCol],
-            this.state.grid[this.state.finishRow][this.state.finishCol]
+            this.grid[this.state.startRow][this.state.startCol],
+            this.grid[this.state.finishRow][this.state.finishCol]
         );
     }
 
     render() {
-        const { grid } = this.state;
-
         return (
             <>
                 <button onClick={this.click}>a</button>
                 <div className="grid-container"> {
-                    grid.map((row, rowId) => {
+                    this.grid.map((row, rowId) => {
                         return (
                             <div className="row" key={rowId}> {
                                 row.map((cell, colId) => <Cell
                                     key={colId}
                                     isFinish={cell.isFinish}
                                     isStart={cell.isStart}
-                                    setWall={(w) => this.state.grid[rowId][colId].isWall = w}
+                                    setWall={(w) => this.grid[rowId][colId].isWall = w}
                                     setFuncs={(funcs) => this.setFuncs(rowId, colId, funcs)}
                                 />)
                             } </div>
