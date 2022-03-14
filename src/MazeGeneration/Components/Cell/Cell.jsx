@@ -17,6 +17,7 @@ export default class Cell extends Component {
         this.state = {
             isStart: props.isStart,
             isFinish: props.isFinish,
+            setWall: props.setWall,
             isWall: false,  // all cells start as spaces
             isVisited: false,
         };
@@ -38,8 +39,10 @@ export default class Cell extends Component {
 
         // Check the current method
         if (Cell.placing) {
+            this.state.setWall(true);
             this.setState({ isWall: true });
         } else {
+            this.state.setWall(false);
             this.setState({ isWall: false });
         }
     }
