@@ -11,13 +11,8 @@ class CellGrid extends Component {
             grid: [],
             rows: 20,
             cols: 50,
-        }
+        };
     };
-
-    cellOnClick(i, j) {
-        const row = this.state.grid.at(i);
-        console.log(row)
-    }
 
     componentDidMount() {
         const grid = []
