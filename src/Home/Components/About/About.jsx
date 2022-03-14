@@ -1,7 +1,7 @@
 import './About.scss'
 
-import cap from '../../Assets/Icons/graduation-cap.svg'
-import briefcase from '../../Assets/Icons/briefcase.svg'
+import cap from '../../../Assets/Icons/graduation-cap.svg'
+import briefcase from '../../../Assets/Icons/briefcase.svg'
 
 function About() {
     return (

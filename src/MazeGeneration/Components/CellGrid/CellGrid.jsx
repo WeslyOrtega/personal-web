@@ -1,7 +1,7 @@
 import { Component } from "react";
 import "./CellGrid.scss"
 
-import Cell from "./Cell"
+import Cell from "../Cell/Cell"
 
 class CellGrid extends Component {
 

@@ -1,7 +1,7 @@
 import "./MazeGeneration.scss"
 
-import Navbar from "../../Components/Navbar/Navbar";
-import CellGrid from "../../Components/CellGrid/CellGrid";
+import Navbar from "../../Home/Components/Navbar/Navbar";
+import CellGrid from "../../MazeGeneration/Components/CellGrid/CellGrid";
 
 function MazeGeneration() {
     return (

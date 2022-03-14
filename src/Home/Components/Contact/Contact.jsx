@@ -1,7 +1,7 @@
 import './Contact.scss'
 
-import github from '../../Assets/Icons/github.svg'
-import linkedin from '../../Assets/Icons/linkedin.svg'
+import github from '../../../Assets/Icons/github.svg'
+import linkedin from '../../../Assets/Icons/linkedin.svg'
 
 function Contact() {
     return (
