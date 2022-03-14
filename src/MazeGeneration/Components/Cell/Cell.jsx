@@ -18,17 +18,21 @@ export default class Cell extends Component {
             isStart: props.isStart,
             isFinish: props.isFinish,
             isWall: false,  // all cells start as spaces
+            isVisited: false,
         };
 
         // bind `this` to functions
         this.toggleWall = this.toggleWall.bind(this);
         this.onMouseDown = this.onMouseDown.bind(this);
         this.onMouseEnter = this.onMouseEnter.bind(this);
+        this.setVisited = this.setVisited.bind(this);
+
+        props.setFuncs({ setVisited: this.setVisited });
     };
 
     toggleWall() {
-        // Do not convert start and finish nodes into walls
-        if (this.isStart || this.isFinish) {
+        // Do not convert start, finish, and already visited nodes into walls
+        if (this.state.isStart || this.state.isFinish || this.state.isVisited) {
             return;
         }
 
@@ -68,6 +72,10 @@ export default class Cell extends Component {
         Cell.mouseDown = false;
     }
 
+    setVisited() {
+        this.setState({ isVisited: true })
+    }
+
     render() {
         // for CSS styling
         var status = "";
@@ -77,6 +85,8 @@ export default class Cell extends Component {
             status = "finish-cell";
         } else if (this.state.isWall) {
             status = "wall";
+        } else if (this.state.isVisited) {
+            status = "visited-cell"
         }
 
         return <div
