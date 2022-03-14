@@ -1,0 +1,34 @@
+.cell {
+    width: 15px;
+    height: 15px;
+    background-color: #d6d6d6;
+    border: 1px solid #1f1f1f;
+}
+
+.cell:hover {
+    background-color: #a6a6a6;
+}
+
+.start-cell {
+    background-color: #00be00;
+}
+
+.start-cell:hover {
+    background-color: #00ae00;
+}
+
+.finish-cell {
+    background-color: #d60000;
+}
+
+.finish-cell:hover {
+    background-color: #c60000;
+}
+
+.wall {
+    background-color: #000000;
+}
+
+.wall:hover {
+    background-color: #000000;
+}
