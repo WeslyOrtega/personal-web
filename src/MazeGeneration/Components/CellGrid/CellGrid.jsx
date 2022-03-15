@@ -3,6 +3,8 @@ import "./CellGrid.scss";
 
 import Cell from "../Cell/Cell";
 import BreadthFirstSearch from "../../PathfindingAlgorithms/BreadthFirstSearch";
+import DepthFirstSearch from "../../PathfindingAlgorithms/DepthFirstSearch";
+import AStarSearch from "../../PathfindingAlgorithms/AStartSearch";
 
 class CellGrid extends Component {
 
@@ -32,12 +34,14 @@ class CellGrid extends Component {
             for (let j = 0; j < this.state.cols; j++) {
                 currRow.push(
                     {
+                        id: (i * this.state.cols) + j,
                         isStart: i === this.state.startRow && j === this.state.startCol,
                         isFinish: i === this.state.finishRow && j === this.state.finishCol,
                         isVisited: false,
                         isWall: false,
                         setVisited: () => this.grid[i][j].isVisited = true,
                         getNeighbors: () => this.getCellNeighbors(i, j),
+                        getDistanceToExit: () => Math.abs(i - this.state.finishRow) + Math.abs(j - this.state.finishCol)
                     }
                 );
             }
@@ -74,7 +78,7 @@ class CellGrid extends Component {
     }
 
     click() {
-        BreadthFirstSearch(
+        AStarSearch(
             this.grid[this.state.startRow][this.state.startCol],
             this.grid[this.state.finishRow][this.state.finishCol]
         );
