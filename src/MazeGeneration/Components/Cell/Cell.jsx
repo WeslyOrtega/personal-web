@@ -27,8 +27,9 @@ export default class Cell extends Component {
         this.onMouseDown = this.onMouseDown.bind(this);
         this.onMouseEnter = this.onMouseEnter.bind(this);
         this.setVisited = this.setVisited.bind(this);
+        this.setPath = this.setPath.bind(this);
 
-        props.setFuncs({ setVisited: this.setVisited });
+        props.setFuncs({ setVisited: this.setVisited, setPath: this.setPath });
     };
 
     toggleWall() {
@@ -76,7 +77,11 @@ export default class Cell extends Component {
     }
 
     setVisited() {
-        this.setState({ isVisited: true })
+        this.setState({ isVisited: true });
+    }
+
+    setPath() {
+        this.setState({ isPath: true });
     }
 
     render() {
@@ -88,6 +93,8 @@ export default class Cell extends Component {
             status = "finish-cell";
         } else if (this.state.isWall) {
             status = "wall";
+        } else if (this.state.isPath) {
+            status = "path-cell"
         } else if (this.state.isVisited) {
             status = "visited-cell"
         }
