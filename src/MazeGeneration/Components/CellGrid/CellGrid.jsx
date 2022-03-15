@@ -2,7 +2,7 @@ import { Component } from "react";
 import "./CellGrid.scss";
 
 import Cell from "../Cell/Cell";
-import DepthFirstSearch from "../../PathfindingAlgorithms/DepthFirstSearch";
+import BreadthFirstSearch from "../../PathfindingAlgorithms/BreadthFirstSearch";
 
 class CellGrid extends Component {
 
@@ -48,10 +48,11 @@ class CellGrid extends Component {
 
     setFuncs(row, col, funcs) {
         let cell = this.grid[row][col];
-        const { setVisited } = funcs;
+        const { setVisited, setPath } = funcs;
         this.grid[row][col] = {
             ...cell,
             animateVisited: setVisited,
+            animatePath: setPath,
         };
     }
 
@@ -73,7 +74,7 @@ class CellGrid extends Component {
     }
 
     click() {
-        DepthFirstSearch(
+        BreadthFirstSearch(
             this.grid[this.state.startRow][this.state.startCol],
             this.grid[this.state.finishRow][this.state.finishCol]
         );
