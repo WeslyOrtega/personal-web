@@ -1,18 +1,41 @@
 export default function DepthFirstSearch(startCell, finishCell) {
     const animTime = 20;
-    var cellQueue = startCell.getNeighbors();
+    var count = 0;
 
-    var i = 0;
-    while (cellQueue.length > 0) {
-        let cell = cellQueue.shift();
-
-        if (cell.isVisited || cell.isWall) {
-            continue;
+    function helper(cell) {
+        if (cell.isVisited) {
+            return false;
         }
 
-        setTimeout(cell.animateVisited, animTime * i);
+        if (cell.isFinish) {
+            //console.log(cell);
+            animatePath(cell, count, animTime);
+            return true;
+        }
+
         cell.setVisited();
-        cellQueue = cellQueue.concat(cell.getNeighbors());
-        i += 1;
+        setTimeout(cell.animateVisited, animTime * count);
+        count += 1;
+
+        let children = cell.getNeighbors();
+        let freeChildren = children.filter((c) => !c.isVisited);
+        for (let i = 0; i < freeChildren.length; i++) {
+            let child = freeChildren[i];
+            child.prevCell = cell;
+            if (helper(child)) {
+                return true;
+            }
+        }
+
+        return false;
+    }
+
+    helper(startCell);
+}
+
+function animatePath(cell, count, animTime) {
+    while (cell !== undefined) {
+        setTimeout(cell.animatePath, animTime * count);
+        cell = cell.prevCell;
     }
 }
