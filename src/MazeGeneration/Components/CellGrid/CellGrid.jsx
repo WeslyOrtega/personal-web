@@ -6,6 +6,8 @@ import BreadthFirstSearch from "../../PathfindingAlgorithms/BreadthFirstSearch";
 import DepthFirstSearch from "../../PathfindingAlgorithms/DepthFirstSearch";
 import AStarSearch from "../../PathfindingAlgorithms/AStartSearch";
 
+import SelfAvoidingWalk from "../../MazeGenerationAlgorithms/SelfAvoidingWalk";
+
 class CellGrid extends Component {
 
     constructor(props) {
@@ -14,10 +16,10 @@ class CellGrid extends Component {
         this.state = {
             rows: 21,
             cols: 51,
-            startRow: 10,
-            startCol: 10,
-            finishRow: 10,
-            finishCol: 41,
+            startRow: 1,
+            startCol: 0,
+            finishRow: 19,
+            finishCol: 50,
         };
         this.saveFuncs = this.saveFuncs.bind(this);
         this.getCellNeighbors = this.getCellNeighbors.bind(this);
@@ -57,7 +59,8 @@ class CellGrid extends Component {
             ...cell,
             animateVisited: setVisited,
             animatePath: setPath,
-            animateWall: setWall,
+            animateSetWall: () => setWall(true),
+            animateRemoveWall: () => setWall(false),
         };
     }
 
@@ -79,10 +82,15 @@ class CellGrid extends Component {
     }
 
     click() {
-        AStarSearch(
-            this.grid[this.state.startRow][this.state.startCol],
-            this.grid[this.state.finishRow][this.state.finishCol]
-        );
+        const delayTime = SelfAvoidingWalk(this.grid);
+
+        setTimeout(
+            () => AStarSearch(
+                this.grid[this.state.startRow][this.state.startCol],
+                this.grid[this.state.finishRow][this.state.finishCol]
+            ),
+            delayTime
+        )
     }
 
     render() {
