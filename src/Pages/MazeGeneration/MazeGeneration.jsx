@@ -1,7 +1,7 @@
 import "./MazeGeneration.scss"
 
 import Navbar from "../../Home/Components/Navbar/Navbar";
-import MazeGenerationVizualizer from "../../MazeGeneration/Components/MazeGenerationVizualizer/MazeGenerationVizualizer";
+import MazeGenerationVizualizer from "../../MazeGeneration/Components/MazeGenerationVisualizer/MazeGenerationVisualizer";
 
 function MazeGeneration() {
     return (
