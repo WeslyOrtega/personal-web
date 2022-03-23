@@ -1,13 +1,13 @@
 import "./MazeGeneration.scss"
 
 import Navbar from "../../Home/Components/Navbar/Navbar";
-import CellGrid from "../../MazeGeneration/Components/CellGrid/CellGrid";
+import MazeGenerationVizualizer from "../../MazeGeneration/Components/MazeGenerationVizualizer/MazeGenerationVizualizer";
 
 function MazeGeneration() {
     return (
         <div className="maze-page-container">
             <Navbar />
-            <CellGrid />
+            <MazeGenerationVizualizer />
         </div>
     );
 }
