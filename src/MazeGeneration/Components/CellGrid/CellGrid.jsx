@@ -2,11 +2,6 @@ import { Component } from "react";
 import "./CellGrid.scss";
 
 import Cell from "../Cell/Cell";
-import BreadthFirstSearch from "../../PathfindingAlgorithms/BreadthFirstSearch";
-import DepthFirstSearch from "../../PathfindingAlgorithms/DepthFirstSearch";
-import AStarSearch from "../../PathfindingAlgorithms/AStartSearch";
-
-import SelfAvoidingWalk from "../../MazeGenerationAlgorithms/SelfAvoidingWalk";
 
 class CellGrid extends Component {
 
@@ -21,10 +16,15 @@ class CellGrid extends Component {
             finishRow: 19,
             finishCol: 50,
         };
+
+        this.setGrid = this.setGrid.bind(this);
         this.saveFuncs = this.saveFuncs.bind(this);
         this.getCellNeighbors = this.getCellNeighbors.bind(this);
-        this.click = this.click.bind(this);
-        this.setGrid = this.setGrid.bind(this);
+        this.startGen = this.startGen.bind(this);
+        this.startSearch = this.startSearch.bind(this);
+
+        props.saveStartGen(this.startGen);
+        props.saveStartSearch(this.startSearch);
 
         this.setGrid();
     };
@@ -81,39 +81,36 @@ class CellGrid extends Component {
         return neighbors;
     }
 
-    click() {
-        const delayTime = SelfAvoidingWalk(this.grid);
+    startGen(genAlgo) {
+        const delayTime = genAlgo(this.grid);
+        return delayTime;
+    }
 
-        setTimeout(
-            () => AStarSearch(
-                this.grid[this.state.startRow][this.state.startCol],
-                this.grid[this.state.finishRow][this.state.finishCol]
-            ),
-            delayTime
+    startSearch(searchAlgo) {
+        searchAlgo(
+            this.grid[this.state.startRow][this.state.startCol],
+            this.grid[this.state.finishRow][this.state.finishCol]
         )
     }
 
     render() {
         return (
-            <>
-                <button onClick={this.click}>a</button>
-                <div className="grid-container"> {
-                    this.grid.map((row, rowId) => {
-                        return (
-                            <div className="row" key={rowId}> {
-                                row.map((cell, colId) => <Cell
-                                    key={colId}
-                                    isFinish={cell.isFinish}
-                                    isStart={cell.isStart}
-                                    setWall={(w) => this.grid[rowId][colId].isWall = w}
-                                    saveFuncs={(funcs) => this.saveFuncs(rowId, colId, funcs)}
-                                />)
-                            } </div>
-                        )
-                    })
-                }
-                </div>
-            </>
+            <div className="grid-container"> {
+                this.grid.map((row, rowId) => {
+                    return (
+                        <div className="row" key={rowId}> {
+                            row.map((cell, colId) => <Cell
+                                key={colId}
+                                isFinish={cell.isFinish}
+                                isStart={cell.isStart}
+                                setWall={(w) => this.grid[rowId][colId].isWall = w}
+                                saveFuncs={(funcs) => this.saveFuncs(rowId, colId, funcs)}
+                            />)
+                        } </div>
+                    )
+                })
+            }
+            </div>
         );
     }
 
