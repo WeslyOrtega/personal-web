@@ -19,7 +19,7 @@ class CellGrid extends Component {
             finishRow: 10,
             finishCol: 41,
         };
-        this.setFuncs = this.setFuncs.bind(this);
+        this.saveFuncs = this.saveFuncs.bind(this);
         this.getCellNeighbors = this.getCellNeighbors.bind(this);
         this.click = this.click.bind(this);
         this.setGrid = this.setGrid.bind(this);
@@ -50,13 +50,14 @@ class CellGrid extends Component {
         this.grid = grid;
     }
 
-    setFuncs(row, col, funcs) {
+    saveFuncs(row, col, funcs) {
         let cell = this.grid[row][col];
-        const { setVisited, setPath } = funcs;
+        const { setVisited, setPath, setWall } = funcs;
         this.grid[row][col] = {
             ...cell,
             animateVisited: setVisited,
             animatePath: setPath,
+            animateWall: setWall,
         };
     }
 
@@ -97,7 +98,7 @@ class CellGrid extends Component {
                                     isFinish={cell.isFinish}
                                     isStart={cell.isStart}
                                     setWall={(w) => this.grid[rowId][colId].isWall = w}
-                                    setFuncs={(funcs) => this.setFuncs(rowId, colId, funcs)}
+                                    saveFuncs={(funcs) => this.saveFuncs(rowId, colId, funcs)}
                                 />)
                             } </div>
                         )

@@ -19,18 +19,28 @@ export default class Cell extends Component {
             isFinish: props.isFinish,
             setWall: props.setWall,
             isWall: false,  // all cells start as spaces
-            isVisited: false,
+            isVisited: false,  // all cells start as not visited
         };
 
         // bind `this` to functions
+        this.setWall = this.setWall.bind(this);
         this.toggleWall = this.toggleWall.bind(this);
         this.onMouseDown = this.onMouseDown.bind(this);
         this.onMouseEnter = this.onMouseEnter.bind(this);
         this.setVisited = this.setVisited.bind(this);
         this.setPath = this.setPath.bind(this);
 
-        props.setFuncs({ setVisited: this.setVisited, setPath: this.setPath });
+        props.saveFuncs({
+            setVisited: this.setVisited,
+            setPath: this.setPath,
+            setWall: this.setWall,
+        });
     };
+
+    setWall(val) {
+        this.state.setWall(val);
+        this.setState({ isWall: val });
+    }
 
     toggleWall() {
         // Do not convert start, finish, and already visited nodes into walls
@@ -40,11 +50,9 @@ export default class Cell extends Component {
 
         // Check the current method
         if (Cell.placing) {
-            this.state.setWall(true);
-            this.setState({ isWall: true });
+            this.setWall(true);
         } else {
-            this.state.setWall(false);
-            this.setState({ isWall: false });
+            this.setWall(false);
         }
     }
 
