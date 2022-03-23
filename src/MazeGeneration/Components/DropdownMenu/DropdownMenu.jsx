@@ -1,5 +1,3 @@
-import { Component } from "react";
-
 export default function DropdownMenu({ label, value, options, onChange }) {
     return (
         <div className="dropdown-menu">
