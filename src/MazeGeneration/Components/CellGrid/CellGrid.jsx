@@ -9,8 +9,8 @@ class CellGrid extends Component {
         super(props);
         this.grid = [];
         this.state = {
-            rows: 21,
-            cols: 51,
+            rows: props.rowCount,
+            cols: props.colCount,
             startRow: 1,
             startCol: 0,
             finishRow: 19,

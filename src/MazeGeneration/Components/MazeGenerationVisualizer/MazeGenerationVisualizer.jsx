@@ -38,13 +38,17 @@ const generationAlgorithms = [
 
 var genFunc = undefined;
 var searchFunc = undefined;
+const algos = {};
 
 export default function MazeGenerationVizualizer() {
 
     const [genAlgo, setGenAlgo] = useState("SelfAvoidingWalk");
     const [searchAlgo, setSearchAlgo] = useState("AStarSearch");
 
-    const algos = {};
+    const [cols, setCols] = useState(51);
+    const [rows, setRows] = useState(21);
+    const [key, setkey] = useState(0);
+
     useEffect(() => {
         algos.gen = generationAlgorithms.find(it => it.value === genAlgo);
         algos.search = searchAlgorithms.find(it => it.value === searchAlgo);
@@ -54,11 +58,13 @@ export default function MazeGenerationVizualizer() {
         <>
             <div className="option-panel-container">
                 <DropdownMenu label="Generation Algorithm" value={genAlgo} options={generationAlgorithms} onChange={setGenAlgo} />
-                <button onClick={() => genFunc(algos.gen.algo)}> Go </button>
+                <label>Number of Rows</label><input type="number" value={rows} onChange={(e) => { setRows(e.target.value); setkey(key + 1) }}></input>
+                <label>Number of Columns</label><input type="number" value={cols} onChange={(e) => { setCols(e.target.value); setkey(key + 1) }}></input>
+                <button onClick={() => genFunc(algos.gen.algo)}> Generate </button>
                 <DropdownMenu label="Search Algorithm" value={searchAlgo} options={searchAlgorithms} onChange={setSearchAlgo} />
                 <button onClick={() => searchFunc(algos.search.algo)}> Go </button>
             </div>
-            <CellGrid saveStartGen={(f) => genFunc = f} saveStartSearch={(f) => searchFunc = f} />
+            <CellGrid key={key} colCount={cols} rowCount={rows} saveStartGen={(f) => genFunc = f} saveStartSearch={(f) => searchFunc = f} />
         </>
     );
 }
