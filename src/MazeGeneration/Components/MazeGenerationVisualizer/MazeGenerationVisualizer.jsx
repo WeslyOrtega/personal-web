@@ -57,15 +57,44 @@ export default function MazeGenerationVizualizer() {
     return (
         <>
             <div className="option-panel-container">
-                <DropdownMenu label="Generation Algorithm" value={genAlgo} options={generationAlgorithms} onChange={setGenAlgo} />
-                <label>Number of Rows</label><input type="number" value={rows} onChange={(e) => { setRows(e.target.value); setkey(key + 1) }}></input>
-                <label>Number of Columns</label><input type="number" value={cols} onChange={(e) => { setCols(e.target.value); setkey(key + 1) }}></input>
-                <button onClick={() => genFunc(algos.gen.algo)}> Generate </button>
-                <DropdownMenu label="Search Algorithm" value={searchAlgo} options={searchAlgorithms} onChange={setSearchAlgo} />
-                <button onClick={() => searchFunc(algos.search.algo)}> Go </button>
+                <DimensionsInput label="Number of Rows" value={rows} onChange={(e) => { setRows(e.target.value); setkey(key + 1) }} />
+                <DimensionsInput label="Number of Columns" value={cols} onChange={(e) => { setCols(e.target.value); setkey(key + 1) }} />
+                <AlgorithmSelector
+                    menuLabel="Generation Algorithm"
+                    buttonLabel="Generate"
+                    value={genAlgo}
+                    options={generationAlgorithms}
+                    onChange={setGenAlgo}
+                    onClick={() => genFunc(algos.gen.algo)}
+                />
+                <AlgorithmSelector
+                    menuLabel="Pathfinding Algorithm"
+                    buttonLabel="Search"
+                    value={searchAlgo}
+                    options={searchAlgorithms}
+                    onChange={setSearchAlgo}
+                    onClick={() => searchFunc(algos.search.algo)}
+                />
             </div>
             <CellGrid key={key} colCount={cols} rowCount={rows} saveStartGen={(f) => genFunc = f} saveStartSearch={(f) => searchFunc = f} />
         </>
     );
 }
 
+function DimensionsInput({ label, value, onChange }) {
+    return (
+        <label className="dimension-label">
+            {label}
+            <input className="dimension-input" type="number" value={value} onChange={onChange} />
+        </label>
+    )
+}
+
+function AlgorithmSelector({ menuLabel, buttonLabel, value, options, onChange, onClick }) {
+    return (
+        <div className="algorithm-selector">
+            <DropdownMenu label={menuLabel} value={value} options={options} onChange={onChange} />
+            <button className="dropdown-submit" onClick={onClick}> {buttonLabel} </button>
+        </div>
+    )
+}
