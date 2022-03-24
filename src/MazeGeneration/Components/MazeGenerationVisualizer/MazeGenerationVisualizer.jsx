@@ -45,7 +45,7 @@ export default function MazeGenerationVizualizer() {
     const [genAlgo, setGenAlgo] = useState("SelfAvoidingWalk");
     const [searchAlgo, setSearchAlgo] = useState("AStarSearch");
 
-    const [cols, setCols] = useState(51);
+    const [cols, setCols] = useState(31);
     const [rows, setRows] = useState(21);
     const [key, setkey] = useState(0);
 
@@ -55,7 +55,7 @@ export default function MazeGenerationVizualizer() {
     }, [genAlgo, searchAlgo]);
 
     return (
-        <>
+        <div className="visualizer-container">
             <div className="option-panel-container">
                 <DimensionsInput label="Number of Rows" value={rows} onChange={(e) => { setRows(e.target.value); setkey(key + 1) }} />
                 <DimensionsInput label="Number of Columns" value={cols} onChange={(e) => { setCols(e.target.value); setkey(key + 1) }} />
@@ -77,7 +77,7 @@ export default function MazeGenerationVizualizer() {
                 />
             </div>
             <CellGrid key={key} colCount={cols} rowCount={rows} saveStartGen={(f) => genFunc = f} saveStartSearch={(f) => searchFunc = f} />
-        </>
+        </div>
     );
 }
 
