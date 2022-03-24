@@ -54,9 +54,9 @@ export default function MazeGenerationVizualizer() {
         <>
             <div className="option-panel-container">
                 <DropdownMenu label="Search Algorithm" value={searchAlgo} options={searchAlgorithms} onChange={setSearchAlgo} />
-                <button onClick={() => genFunc(algos.gen.algo)}> Go </button>
-                <DropdownMenu label="Generation Algorithm" value={genAlgo} options={generationAlgorithms} onChange={setGenAlgo} />
                 <button onClick={() => searchFunc(algos.search.algo)}> Go </button>
+                <DropdownMenu label="Generation Algorithm" value={genAlgo} options={generationAlgorithms} onChange={setGenAlgo} />
+                <button onClick={() => genFunc(algos.gen.algo)}> Go </button>
             </div>
             <CellGrid saveStartGen={(f) => genFunc = f} saveStartSearch={(f) => searchFunc = f} />
         </>
